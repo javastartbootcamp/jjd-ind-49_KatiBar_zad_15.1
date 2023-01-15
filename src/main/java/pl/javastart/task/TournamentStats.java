@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 public class TournamentStats {
-
     public static final String STOP = "STOP";
     public static final int FIRST_NAME_COMPARATOR = 1;
     public static final int LAST_NAME_COMPARATOR = 2;
@@ -16,14 +15,14 @@ public class TournamentStats {
         // tutaj dodaj swoje rozwiązanie
         // użyj przekazanego scannera do wczytywania wartości
         String fileName = "stats.csv";
-        try {
-        List<Person> playersList = getDataFromUser(scanner);
-        sortPlayersList(scanner, fileName, playersList);
-        } catch (IOException e) {
-            System.out.println("Nie udało się zapisać danych do pliku " + fileName);
-        } catch (InputMismatchException | ClassCastException e) {
-            System.out.println("Podałeś nieprawidłową wartość");
-        }
+            try {
+                List<Person> playersList = getDataFromUser(scanner);
+                sortPlayersList(scanner, fileName, playersList);
+            } catch (IOException e) {
+                System.out.println("Nie udało się zapisać danych do pliku " + fileName);
+            } catch (InputMismatchException | ClassCastException e) {
+                System.out.println("Podałeś nieprawidłową wartość");
+            }
         scanner.close();
     }
 
