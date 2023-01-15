@@ -9,5 +9,4 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         tournamentStats.run(scanner);
     }
-
 }
