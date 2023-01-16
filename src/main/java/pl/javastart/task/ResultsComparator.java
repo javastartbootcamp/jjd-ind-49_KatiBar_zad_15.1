@@ -11,16 +11,10 @@ public class ResultsComparator implements Comparator<Person> {
         if (p1 != null && p2 == null) {
             return -1;
         }
-        if (p1 == null && p2 != null) {
+        if (p1 == null) {
             return 1;
         }
 
-        if (p1.getResult() < p2.getResult()) {
-            return -1;
-        } else if (p1.getResult() > p2.getResult()) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return Integer.compare(p1.getResult(), p2.getResult());
     }
 }
