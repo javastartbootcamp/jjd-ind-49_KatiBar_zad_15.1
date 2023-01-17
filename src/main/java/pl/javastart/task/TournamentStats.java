@@ -20,7 +20,7 @@ public class TournamentStats {
             sortPlayersList(scanner, fileName, playersList);
         } catch (IOException e) {
             System.out.println("Nie udało się zapisać danych do pliku " + fileName);
-        } catch (InputMismatchException | ClassCastException e) {
+        } catch (InputMismatchException e) {
             System.out.println("Podałeś nieprawidłową wartość");
         }
         scanner.close();
@@ -29,12 +29,11 @@ public class TournamentStats {
     private void sortPlayersList(Scanner scanner, String fileName, List<Person> playersList) throws IOException {
         if (!playersList.isEmpty()) {
             Comparator<Person> comparator = chooseComparator(scanner);
-            boolean orIncreasingly = chooseOrSortIncreasingly(scanner);
-            if (orIncreasingly) {
-                playersList.sort(comparator);
-            } else {
-                playersList.sort(comparator.reversed());
+            boolean reverse = chooseOrSortIncreasingly(scanner);
+            if (reverse) {
+                comparator = comparator.reversed();
             }
+            playersList.sort(comparator);
             saveToCsv(fileName, playersList);
         } else {
             System.out.println("Lista zawodników jest pusta");
@@ -63,15 +62,7 @@ public class TournamentStats {
         int sortOption = scanner.nextInt();
         scanner.nextLine();
 
-        switch (sortOption) {
-            case SORT_ASC:
-                return true;
-            case SORT_DESC:
-                return false;
-            default:
-                System.out.println("Podałeś nieprawidłową wartość");
-                return false;
-        }
+        return sortOption == SORT_DESC;
     }
 
     private Comparator<Person> chooseComparator(Scanner scanner) throws InputMismatchException {
@@ -93,7 +84,7 @@ public class TournamentStats {
 
     private List<Person> getDataFromUser(Scanner scanner) {
         List<Person> players = new ArrayList<>();
-        String player = null;
+        String player;
         do {
             System.out.println("Podaj wynik kolejnego gracza (lub stop)");
             player = scanner.nextLine();
